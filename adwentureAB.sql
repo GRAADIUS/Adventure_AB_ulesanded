@@ -407,3 +407,51 @@ Create View vwOnTempTable
 as
 Select Id, Name, Gender
 from ##TestTempTable
+----------Nr.92--------------------------------------
+create trigger trMyFirstTrigger
+on database
+for create_table
+as
+begin
+	print 'New table created'
+end
+
+create table test(id int)
+
+alter trigger trMyFirstTrigger
+on database
+for create_table, alter_table, drop_table
+as
+begin
+	print 'A table has just been created, modified or deleted'
+end
+
+alter trigger trMyFirstTrigger
+on database
+for create_table, alter_table, drop_table
+as
+begin
+	rollback
+	print 'You cannot create, alter or drop a table'
+end
+
+disable trigger trMyFirstTrigger on database
+
+drop trigger trMyFirstTrigger on database
+
+create trigger trRenameTable
+on database
+for rename
+as
+begin
+	print 'You Just renamed something'
+end
+----------Nr.93--------------------------------------
+create trigger tr_databaseScopeTrigger
+on database
+for create_table, alter_table, drop_table
+as
+begin
+	rollback
+	print 'You cannot create, alter or drop a table in the current database'
+end
