@@ -455,3 +455,24 @@ begin
 	rollback
 	print 'You cannot create, alter or drop a table in the current database'
 end
+create table ttt(id int)
+
+create trigger tr_ServerScopeTrigger
+on ALL server
+for create_table, alter_table, drop_table
+as
+begin
+	rollback
+	print 'You cannot create, alter or drop a table in any database on the server'
+end
+create table ttt(id int)
+
+disable trigger tr_ServerScopeTrigger on all server
+create table ttt(id int)
+
+enable trigger tr_ServerScopeTrigger on all server
+create table ttt(id int)
+
+drop trigger tr_ServerScopeTrigger on all server
+create table ttt(id int)
+----------Nr.94--------------------------------------
