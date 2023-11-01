@@ -496,3 +496,20 @@ go
 
 create table sss(id int)
 --------------------------------------№96--------------------------------------
+create trigger tr_LogonAuditTrigger
+on all server
+for logon
+as
+begin
+	declare @LoginName nvarchar(100)
+	set @LoginName=original_login()
+	if (select count(*) from sys.dm_exec_sessions
+		where is_user_process = 1 
+		and original_login_name = @LoginName)>3
+	BEGIN
+		PRINT 'Fourth connection of' + @LoginName + 'bloced'
+		rollback
+	end
+end
+
+Execute sp_readerrorlog
