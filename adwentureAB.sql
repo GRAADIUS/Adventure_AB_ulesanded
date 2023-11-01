@@ -1,4 +1,4 @@
-----------Nr.32--------------------------------------
+--------------------------------------№32--------------------------------------
 Create function fn_ILTVF_GetEmployees()
 Returns Table
 as
@@ -23,7 +23,7 @@ select * from fn_MSTVF_GetEmployees();
 update fn_ILTVF_GetEmployees() set firstName = 'Sam1' 
 where EmployeeKey = 1;
 select * from fn_ILTVF_GetEmployees();
-----------Nr.33--------------------------------------
+--------------------------------------№33--------------------------------------
 create function fn_GetEmployeeNameByld(@id int)
 returns nvarchar(20)
 as
@@ -57,7 +57,7 @@ where EmployeeKey = @id)
 end
 
 select dbo.fn_GetEmployeeNameByld(15);
-----------Nr.34--------------------------------------
+--------------------------------------№34--------------------------------------
 create table #PersonDetails(
 Id int primary key,
 Name varchar(20));
@@ -89,7 +89,7 @@ Name varchar(20));
 select * from ##PersonDetails;
 
 create Table ##EmployeeDetails(id int, Name nvarchar(20)) 
-----------Nr.35--------------------------------------
+--------------------------------------№35--------------------------------------
 Select * from DimEmployee 
 where EmployeeNationalIDAlternateKey > 50000000 
 and EmployeeNationalIDAlternateKey < 700000000
@@ -100,7 +100,7 @@ on DimEmployee (EmployeeNationalIDAlternateKey ASC)
 execute sp_helptext DimEmployee
 
 drop index DimEmployee.IX_tblEmploye_Salary
-----------Nr.36--------------------------------------
+--------------------------------------№36--------------------------------------
 create table tblEmployee(
 id int primary key,
 name nvarchar(50),
@@ -144,7 +144,7 @@ select * from #PersonDetails
 end;
 
 create Table ##EmployeeDetails(id int, Name nvarchar(20)) 
-----------Nr.37--------------------------------------
+--------------------------------------№37--------------------------------------
 create table tblEmployee_2(
 id int primary key,
 firstName nvarchar(50),
@@ -175,7 +175,7 @@ UNIQUE NONCLUSTERED (City)
 CREATE UNIQUE INDEX IX_tblEmployee_City
 ON tblEmployee_2(City)
 WITH IGNORE_DUP_KEY
-----------Nr.38--------------------------------------
+--------------------------------------№38--------------------------------------
 create table tblEmployee_3(
 id int primary key,
 firstName nvarchar(50),
@@ -205,7 +205,7 @@ select * from tblEmployee_3 order by salary desc
 select salary, COUNT (salary) as total
 from tblEmployee_3
 group by salary
-----------Nr.39--------------------------------------
+--------------------------------------№39--------------------------------------
 create table tblEmployee(
 id int primary key,
 Name nvarchar(50),
@@ -267,7 +267,7 @@ from tblEmployee
 join tblDepartment
 on tblEmployee.departmentID = tblDepartment.deptID
 group by deptName
-----------Nr.40--------------------------------------
+--------------------------------------№40--------------------------------------
 create table tblEmployee_1(
 id int primary key,
 Name nvarchar(50),
@@ -317,7 +317,7 @@ select * from vwEmployeeDetailsByDepartment
 
 update vwEmployeeDetailsByDepartment
 set deptName = 'IT' where name = 'John'
-----------Nr.41--------------------------------------
+--------------------------------------№41--------------------------------------
 create table tblProduct(
 productID int primary key,
 name nvarchar(20),
@@ -356,7 +356,7 @@ group by name
 
 create unique clustered index UIX_vWTotalSalesByProduct_Name
 on vWTotalSalesByProduct(name)
-----------Nr.42--------------------------------------
+--------------------------------------№42--------------------------------------
 create table tblEmployee_2(
 id int primary key,
 Name nvarchar(50),
@@ -407,7 +407,7 @@ Create View vwOnTempTable
 as
 Select Id, Name, Gender
 from ##TestTempTable
-----------Nr.92--------------------------------------
+--------------------------------------№92--------------------------------------
 create trigger trMyFirstTrigger
 on database
 for create_table
@@ -446,7 +446,7 @@ as
 begin
 	print 'You Just renamed something'
 end
-----------Nr.93--------------------------------------
+--------------------------------------№93--------------------------------------
 create trigger tr_databaseScopeTrigger
 on database
 for create_table, alter_table, drop_table
@@ -475,4 +475,24 @@ create table ttt(id int)
 
 drop trigger tr_ServerScopeTrigger on all server
 create table ttt(id int)
-----------Nr.94--------------------------------------
+--------------------------------------№94--------------------------------------
+create trigger tr_DatabaseScopeTrigger
+on database
+for create_table
+as
+begin
+	print 'Database Scope Trigger'
+end
+go
+
+create trigger tr_ServerScopeTrigger
+on all server
+for create_table
+as
+begin
+	print 'Server Scope Trigger'
+end
+go
+
+create table sss(id int)
+--------------------------------------№96--------------------------------------
